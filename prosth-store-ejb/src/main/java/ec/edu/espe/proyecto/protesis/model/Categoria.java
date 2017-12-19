@@ -7,18 +7,13 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,26 +21,21 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "categoria")
-@NamedQueries({
-    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")})
+
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_CATEGORIA", nullable = false)
     private Integer codCategoria;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+   
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
+  
     @Column(name = "DESCRIPCION", nullable = false, length = 200)
     private String descripcion;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codCategoria", fetch = FetchType.EAGER)
     private List<Producto> productoList;
 
@@ -54,12 +44,6 @@ public class Categoria implements Serializable {
 
     public Categoria(Integer codCategoria) {
         this.codCategoria = codCategoria;
-    }
-
-    public Categoria(Integer codCategoria, String nombre, String descripcion) {
-        this.codCategoria = codCategoria;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
     }
 
     public Integer getCodCategoria() {

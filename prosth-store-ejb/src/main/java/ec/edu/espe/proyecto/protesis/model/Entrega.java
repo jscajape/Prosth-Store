@@ -7,21 +7,15 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -29,39 +23,33 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "entrega")
-@NamedQueries({
-    @NamedQuery(name = "Entrega.findAll", query = "SELECT e FROM Entrega e")})
 public class Entrega implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "COD_ENTREGA", nullable = false, length = 10)
     private String codEntrega;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
+
     @Column(name = "DESCRIPCION", nullable = false, length = 200)
     private String descripcion;
-    @Basic(optional = false)
-    @NotNull
+    
     @Column(name = "FECHA_SALIDA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSalida;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "FECHA_LLEGADA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaLlegada;
+    
     @JoinColumn(name = "COD_VENTA", referencedColumnName = "COD_VENTA", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Venta codVenta;
+    
     @JoinColumns({
         @JoinColumn(name = "COD_CAMION", referencedColumnName = "COD_CAMION", nullable = false),
         @JoinColumn(name = "COD_CONDUCTOR", referencedColumnName = "COD_CONDUCTOR", nullable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Camion camion;
 
     public Entrega() {
@@ -71,12 +59,6 @@ public class Entrega implements Serializable {
         this.codEntrega = codEntrega;
     }
 
-    public Entrega(String codEntrega, String descripcion, Date fechaSalida, Date fechaLlegada) {
-        this.codEntrega = codEntrega;
-        this.descripcion = descripcion;
-        this.fechaSalida = fechaSalida;
-        this.fechaLlegada = fechaLlegada;
-    }
 
     public String getCodEntrega() {
         return codEntrega;

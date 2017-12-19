@@ -7,18 +7,13 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,24 +21,20 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "modo_pago")
-@NamedQueries({
-    @NamedQuery(name = "ModoPago.findAll", query = "SELECT m FROM ModoPago m")})
 public class ModoPago implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_PAGO", nullable = false)
     private Integer codPago;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
+    
     @Column(name = "TIPO_PAGO", nullable = false, length = 3)
     private String tipoPago;
-    @Size(max = 200)
+
     @Column(name = "DESCRIPCION", length = 200)
     private String descripcion;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codPago", fetch = FetchType.EAGER)
     private List<DetalleVenta> detalleVentaList;
 
@@ -54,10 +45,6 @@ public class ModoPago implements Serializable {
         this.codPago = codPago;
     }
 
-    public ModoPago(Integer codPago, String tipoPago) {
-        this.codPago = codPago;
-        this.tipoPago = tipoPago;
-    }
 
     public Integer getCodPago() {
         return codPago;

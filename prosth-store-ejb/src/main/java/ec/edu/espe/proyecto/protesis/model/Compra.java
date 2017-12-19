@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,13 +16,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -31,29 +27,25 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "compra")
-@NamedQueries({
-    @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c")})
 public class Compra implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_COMPRA", nullable = false)
     private Integer codCompra;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "FECHA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
+    
     @Column(name = "VALOR_TOTAL", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorTotal;
+    
     @JoinColumn(name = "COD_PROVEEDOR", referencedColumnName = "COD_PROVEEDOR", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Proveedor codProveedor;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codCompra", fetch = FetchType.EAGER)
     private List<DetalleCompra> detalleCompraList;
 
@@ -62,12 +54,6 @@ public class Compra implements Serializable {
 
     public Compra(Integer codCompra) {
         this.codCompra = codCompra;
-    }
-
-    public Compra(Integer codCompra, Date fecha, BigDecimal valorTotal) {
-        this.codCompra = codCompra;
-        this.fecha = fecha;
-        this.valorTotal = valorTotal;
     }
 
     public Integer getCodCompra() {

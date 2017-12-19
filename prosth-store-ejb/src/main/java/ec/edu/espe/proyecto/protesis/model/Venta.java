@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,13 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -32,33 +28,30 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "venta")
-@NamedQueries({
-    @NamedQuery(name = "Venta.findAll", query = "SELECT v FROM Venta v")})
 public class Venta implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_VENTA", nullable = false)
     private Integer codVenta;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "FECHA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "VALOR_TOTAL", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorTotal;
+    
     @JoinColumns({
         @JoinColumn(name = "COD_USUARIO", referencedColumnName = "COD_USUARIO", nullable = false),
         @JoinColumn(name = "COD_TIPO_USUARIO", referencedColumnName = "COD_TIPO_USUARIO", nullable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Usuario usuario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codVenta", fetch = FetchType.EAGER)
     private List<DetalleVenta> detalleVentaList;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codVenta", fetch = FetchType.EAGER)
     private List<Entrega> entregaList;
 
@@ -67,12 +60,6 @@ public class Venta implements Serializable {
 
     public Venta(Integer codVenta) {
         this.codVenta = codVenta;
-    }
-
-    public Venta(Integer codVenta, Date fecha, BigDecimal valorTotal) {
-        this.codVenta = codVenta;
-        this.fecha = fecha;
-        this.valorTotal = valorTotal;
     }
 
     public Integer getCodVenta() {

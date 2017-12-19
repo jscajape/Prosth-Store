@@ -7,7 +7,6 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -15,12 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -28,36 +23,30 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "camion")
-@NamedQueries({
-    @NamedQuery(name = "Camion.findAll", query = "SELECT c FROM Camion c")})
+
 public class Camion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @EmbeddedId
     protected CamionPK camionPK;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+
     @Column(name = "PLACA", nullable = false, length = 20)
     private String placa;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+  
     @Column(name = "MODELO", nullable = false, length = 100)
     private String modelo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+ 
     @Column(name = "COLOR", nullable = false, length = 100)
     private String color;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    
     @Column(name = "MARCA", nullable = false, length = 100)
     private String marca;
+    
     @JoinColumn(name = "COD_CONDUCTOR", referencedColumnName = "COD_CONDUCTOR", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Conductor conductor;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "camion", fetch = FetchType.EAGER)
     private List<Entrega> entregaList;
 
@@ -66,14 +55,6 @@ public class Camion implements Serializable {
 
     public Camion(CamionPK camionPK) {
         this.camionPK = camionPK;
-    }
-
-    public Camion(CamionPK camionPK, String placa, String modelo, String color, String marca) {
-        this.camionPK = camionPK;
-        this.placa = placa;
-        this.modelo = modelo;
-        this.color = color;
-        this.marca = marca;
     }
 
     public Camion(int codCamion, int codConductor) {

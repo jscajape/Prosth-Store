@@ -7,18 +7,12 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,40 +20,32 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "detalle_compra")
-@NamedQueries({
-    @NamedQuery(name = "DetalleCompra.findAll", query = "SELECT d FROM DetalleCompra d")})
 public class DetalleCompra implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "COD_DETALLE_COMPRA", nullable = false, length = 10)
     private String codDetalleCompra;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
+   
     @Column(name = "VALOR_TOTAL", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorTotal;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "VALOR_UNITARIO", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorUnitario;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "CANTIDAD", nullable = false)
     private short cantidad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "DESCRIPCION", nullable = false, length = 100)
     private String descripcion;
+    
     @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Producto codProducto;
+    
     @JoinColumn(name = "COD_COMPRA", referencedColumnName = "COD_COMPRA", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Compra codCompra;
 
     public DetalleCompra() {
@@ -69,13 +55,6 @@ public class DetalleCompra implements Serializable {
         this.codDetalleCompra = codDetalleCompra;
     }
 
-    public DetalleCompra(String codDetalleCompra, BigDecimal valorTotal, BigDecimal valorUnitario, short cantidad, String descripcion) {
-        this.codDetalleCompra = codDetalleCompra;
-        this.valorTotal = valorTotal;
-        this.valorUnitario = valorUnitario;
-        this.cantidad = cantidad;
-        this.descripcion = descripcion;
-    }
 
     public String getCodDetalleCompra() {
         return codDetalleCompra;

@@ -7,18 +7,13 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,21 +21,17 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "provincia")
-@NamedQueries({
-    @NamedQuery(name = "Provincia.findAll", query = "SELECT p FROM Provincia p")})
 public class Provincia implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_PROVINCIA", nullable = false)
     private Integer codProvincia;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codProvincia", fetch = FetchType.EAGER)
     private List<Ciudad> ciudadList;
 
@@ -49,11 +40,6 @@ public class Provincia implements Serializable {
 
     public Provincia(Integer codProvincia) {
         this.codProvincia = codProvincia;
-    }
-
-    public Provincia(Integer codProvincia, String nombre) {
-        this.codProvincia = codProvincia;
-        this.nombre = nombre;
     }
 
     public Integer getCodProvincia() {

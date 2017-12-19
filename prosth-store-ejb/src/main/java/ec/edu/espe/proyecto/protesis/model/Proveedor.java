@@ -7,18 +7,13 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,24 +21,20 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "proveedor")
-@NamedQueries({
-    @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p")})
 public class Proveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_PROVEEDOR", nullable = false)
     private Integer codProveedor;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
-    @Size(max = 200)
+
     @Column(name = "DESCRIPCION", length = 200)
     private String descripcion;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codProveedor", fetch = FetchType.EAGER)
     private List<Compra> compraList;
 
@@ -52,11 +43,6 @@ public class Proveedor implements Serializable {
 
     public Proveedor(Integer codProveedor) {
         this.codProveedor = codProveedor;
-    }
-
-    public Proveedor(Integer codProveedor, String nombre) {
-        this.codProveedor = codProveedor;
-        this.nombre = nombre;
     }
 
     public Integer getCodProveedor() {

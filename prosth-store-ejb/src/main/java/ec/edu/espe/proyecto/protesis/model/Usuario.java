@@ -8,7 +8,6 @@ package ec.edu.espe.proyecto.protesis.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -16,14 +15,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -31,65 +26,50 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "usuario")
-@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @EmbeddedId
     protected UsuarioPK usuarioPK;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    
     @Column(name = "CI", nullable = false, length = 10)
     private String ci;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "APELLIDO", nullable = false, length = 100)
     private String apellido;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "EMAIL", nullable = false, length = 100)
     private String email;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "FECHA_NACIMIENTO", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "COD_POSTAL", nullable = false)
     private int codPostal;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "CALLE_PRINCIPAL", nullable = false, length = 100)
     private String callePrincipal;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "CALLE_SECUNDARIA", nullable = false, length = 100)
     private String calleSecundaria;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.EAGER)
     private List<Venta> ventaList;
+    
     @JoinColumn(name = "COD_TIPO_USUARIO", referencedColumnName = "COD_TIPO_USUARIO", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private TipoUsuario tipoUsuario;
+    
     @JoinColumn(name = "COD_CIUDAD", referencedColumnName = "COD_CIUDAD", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Ciudad codCiudad;
 
     public Usuario() {
@@ -97,19 +77,6 @@ public class Usuario implements Serializable {
 
     public Usuario(UsuarioPK usuarioPK) {
         this.usuarioPK = usuarioPK;
-    }
-
-    public Usuario(UsuarioPK usuarioPK, String ci, String nombre, String apellido, String password, String email, Date fechaNacimiento, int codPostal, String callePrincipal, String calleSecundaria) {
-        this.usuarioPK = usuarioPK;
-        this.ci = ci;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.password = password;
-        this.email = email;
-        this.fechaNacimiento = fechaNacimiento;
-        this.codPostal = codPostal;
-        this.callePrincipal = callePrincipal;
-        this.calleSecundaria = calleSecundaria;
     }
 
     public Usuario(String codUsuario, int codTipoUsuario) {

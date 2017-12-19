@@ -7,18 +7,13 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,21 +21,17 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "tipo_usuario")
-@NamedQueries({
-    @NamedQuery(name = "TipoUsuario.findAll", query = "SELECT t FROM TipoUsuario t")})
 public class TipoUsuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_TIPO_USUARIO", nullable = false)
     private Integer codTipoUsuario;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "DESCRIPCION", nullable = false, length = 100)
     private String descripcion;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoUsuario", fetch = FetchType.EAGER)
     private List<Usuario> usuarioList;
 
@@ -49,11 +40,6 @@ public class TipoUsuario implements Serializable {
 
     public TipoUsuario(Integer codTipoUsuario) {
         this.codTipoUsuario = codTipoUsuario;
-    }
-
-    public TipoUsuario(Integer codTipoUsuario, String descripcion) {
-        this.codTipoUsuario = codTipoUsuario;
-        this.descripcion = descripcion;
     }
 
     public Integer getCodTipoUsuario() {

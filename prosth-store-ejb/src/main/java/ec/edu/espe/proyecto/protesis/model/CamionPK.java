@@ -6,10 +6,8 @@
 package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -18,12 +16,9 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class CamionPK implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_CAMION", nullable = false)
     private int codCamion;
-    @Basic(optional = false)
-    @NotNull
+
     @Column(name = "COD_CONDUCTOR", nullable = false)
     private int codConductor;
 

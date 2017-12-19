@@ -7,7 +7,6 @@ package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,12 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -28,24 +23,21 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "ciudad")
-@NamedQueries({
-    @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")})
 public class Ciudad implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "COD_CIUDAD", nullable = false)
     private Integer codCiudad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
+    
     @JoinColumn(name = "COD_PROVINCIA", referencedColumnName = "COD_PROVINCIA", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne
     private Provincia codProvincia;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codCiudad", fetch = FetchType.EAGER)
     private List<Usuario> usuarioList;
 
@@ -56,10 +48,6 @@ public class Ciudad implements Serializable {
         this.codCiudad = codCiudad;
     }
 
-    public Ciudad(Integer codCiudad, String nombre) {
-        this.codCiudad = codCiudad;
-        this.nombre = nombre;
-    }
 
     public Integer getCodCiudad() {
         return codCiudad;
