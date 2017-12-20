@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "detalle_venta")
@@ -27,12 +29,21 @@ public class DetalleVenta implements Serializable {
     @Id
     @Column(name = "COD_DETALLE", nullable = false, length = 10)
     private String codDetalle;
+    
+    @Column(name = "COD_VENTA", nullable = false)
+    private Integer codVenta;
+    
+    @Column(name = "COD_PRODUCTO", nullable = false)
+    private Integer codProducto;
+    
+    @Column(name = "COD_PAGO", nullable = false)
+    private Integer codPago;
 
     @Column(name = "DESCRIPCION", nullable = false, length = 100)
     private String descripcion;
 
     @Column(name = "CANTIDAD", nullable = false)
-    private short cantidad;
+    private Integer cantidad;
 
     @Column(name = "VALOR_UNITARIO", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorUnitario;
@@ -40,17 +51,20 @@ public class DetalleVenta implements Serializable {
     @Column(name = "VALOR_TOTAL", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorTotal;
     
-    @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false)
+    @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", 
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private Producto codProducto;
+    private Producto producto;
     
-    @JoinColumn(name = "COD_PAGO", referencedColumnName = "COD_PAGO", nullable = false)
+    @JoinColumn(name = "COD_PAGO", referencedColumnName = "COD_PAGO", 
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private ModoPago codPago;
+    private ModoPago pago;
     
-    @JoinColumn(name = "COD_VENTA", referencedColumnName = "COD_VENTA", nullable = false)
+    @JoinColumn(name = "COD_VENTA", referencedColumnName = "COD_VENTA", 
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private Venta codVenta;
+    private Venta venta;
 
     public DetalleVenta() {
     }
@@ -76,14 +90,6 @@ public class DetalleVenta implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public short getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(short cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public BigDecimal getValorUnitario() {
         return valorUnitario;
     }
@@ -100,29 +106,63 @@ public class DetalleVenta implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public Producto getCodProducto() {
-        return codProducto;
-    }
-
-    public void setCodProducto(Producto codProducto) {
-        this.codProducto = codProducto;
-    }
-
-    public ModoPago getCodPago() {
-        return codPago;
-    }
-
-    public void setCodPago(ModoPago codPago) {
-        this.codPago = codPago;
-    }
-
-    public Venta getCodVenta() {
+    public Integer getCodVenta() {
         return codVenta;
     }
 
-    public void setCodVenta(Venta codVenta) {
+    public void setCodVenta(Integer codVenta) {
         this.codVenta = codVenta;
     }
+
+    public Integer getCodProducto() {
+        return codProducto;
+    }
+
+    public void setCodProducto(Integer codProducto) {
+        this.codProducto = codProducto;
+    }
+
+    public Integer getCodPago() {
+        return codPago;
+    }
+
+    public void setCodPago(Integer codPago) {
+        this.codPago = codPago;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public ModoPago getPago() {
+        return pago;
+    }
+
+    public void setPago(ModoPago pago) {
+        this.pago = pago;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+
 
     @Override
     public int hashCode() {
@@ -133,7 +173,6 @@ public class DetalleVenta implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof DetalleVenta)) {
             return false;
         }

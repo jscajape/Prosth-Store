@@ -1,25 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "camion")
@@ -30,7 +28,7 @@ public class Camion implements Serializable {
     
     @EmbeddedId
     protected CamionPK camionPK;
-
+    
     @Column(name = "PLACA", nullable = false, length = 20)
     private String placa;
   
@@ -43,12 +41,10 @@ public class Camion implements Serializable {
     @Column(name = "MARCA", nullable = false, length = 100)
     private String marca;
     
-    @JoinColumn(name = "COD_CONDUCTOR", referencedColumnName = "COD_CONDUCTOR", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "COD_CONDUCTOR", referencedColumnName = "COD_CONDUCTOR",
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
     private Conductor conductor;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "camion", fetch = FetchType.EAGER)
-    private List<Entrega> entregaList;
 
     public Camion() {
     }
@@ -109,14 +105,6 @@ public class Camion implements Serializable {
         this.conductor = conductor;
     }
 
-    public List<Entrega> getEntregaList() {
-        return entregaList;
-    }
-
-    public void setEntregaList(List<Entrega> entregaList) {
-        this.entregaList = entregaList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -126,7 +114,6 @@ public class Camion implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Camion)) {
             return false;
         }

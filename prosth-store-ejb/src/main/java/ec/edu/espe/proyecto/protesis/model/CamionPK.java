@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
@@ -11,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Embeddable
 public class CamionPK implements Serializable {
@@ -56,7 +58,6 @@ public class CamionPK implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CamionPK)) {
             return false;
         }

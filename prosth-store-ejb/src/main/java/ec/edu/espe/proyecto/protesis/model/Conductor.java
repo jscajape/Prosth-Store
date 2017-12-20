@@ -1,27 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "conductor")
@@ -48,9 +46,6 @@ public class Conductor implements Serializable {
 
     @Column(name = "LICENCIA", nullable = false)
     private BigInteger licencia;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "conductor", fetch = FetchType.EAGER)
-    private List<Camion> camionList;
 
     public Conductor() {
     }
@@ -108,14 +103,6 @@ public class Conductor implements Serializable {
         this.licencia = licencia;
     }
 
-    public List<Camion> getCamionList() {
-        return camionList;
-    }
-
-    public void setCamionList(List<Camion> camionList) {
-        this.camionList = camionList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -125,7 +112,6 @@ public class Conductor implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Conductor)) {
             return false;
         }

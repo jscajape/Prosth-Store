@@ -1,30 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "venta")
@@ -35,6 +33,12 @@ public class Venta implements Serializable {
     @Id
     @Column(name = "COD_VENTA", nullable = false)
     private Integer codVenta;
+    
+    @Column(name = "COD_USUARIO", nullable = false)
+    private Integer codUsuario;
+    
+    @Column(name = "COD_TIPO_USUARIO", nullable = false)
+    private Integer codTipoUsuario;
 
     @Column(name = "FECHA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -44,16 +48,12 @@ public class Venta implements Serializable {
     private BigDecimal valorTotal;
     
     @JoinColumns({
-        @JoinColumn(name = "COD_USUARIO", referencedColumnName = "COD_USUARIO", nullable = false),
-        @JoinColumn(name = "COD_TIPO_USUARIO", referencedColumnName = "COD_TIPO_USUARIO", nullable = false)})
+        @JoinColumn(name = "COD_USUARIO", referencedColumnName = "COD_USUARIO",
+                nullable = false, insertable = false, updatable = false),
+        @JoinColumn(name = "COD_TIPO_USUARIO", referencedColumnName = "COD_TIPO_USUARIO",
+                nullable = false, insertable = false, updatable = false)})
     @ManyToOne
     private Usuario usuario;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codVenta", fetch = FetchType.EAGER)
-    private List<DetalleVenta> detalleVentaList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codVenta", fetch = FetchType.EAGER)
-    private List<Entrega> entregaList;
 
     public Venta() {
     }
@@ -94,21 +94,22 @@ public class Venta implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<DetalleVenta> getDetalleVentaList() {
-        return detalleVentaList;
+    public Integer getCodUsuario() {
+        return codUsuario;
     }
 
-    public void setDetalleVentaList(List<DetalleVenta> detalleVentaList) {
-        this.detalleVentaList = detalleVentaList;
+    public void setCodUsuario(Integer codUsuario) {
+        this.codUsuario = codUsuario;
     }
 
-    public List<Entrega> getEntregaList() {
-        return entregaList;
+    public Integer getCodTipoUsuario() {
+        return codTipoUsuario;
     }
 
-    public void setEntregaList(List<Entrega> entregaList) {
-        this.entregaList = entregaList;
+    public void setCodTipoUsuario(Integer codTipoUsuario) {
+        this.codTipoUsuario = codTipoUsuario;
     }
+
 
     @Override
     public int hashCode() {
@@ -119,7 +120,6 @@ public class Venta implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Venta)) {
             return false;
         }

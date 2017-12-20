@@ -1,23 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
+import ec.edu.espe.proyecto.protesis.enums.TipoPagoEnum;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "modo_pago")
@@ -29,14 +30,12 @@ public class ModoPago implements Serializable {
     @Column(name = "COD_PAGO", nullable = false)
     private Integer codPago;
     
+    @Enumerated(EnumType.STRING)
     @Column(name = "TIPO_PAGO", nullable = false, length = 3)
-    private String tipoPago;
+    private TipoPagoEnum tipo;
 
     @Column(name = "DESCRIPCION", length = 200)
     private String descripcion;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codPago", fetch = FetchType.EAGER)
-    private List<DetalleVenta> detalleVentaList;
 
     public ModoPago() {
     }
@@ -54,14 +53,14 @@ public class ModoPago implements Serializable {
         this.codPago = codPago;
     }
 
-    public String getTipoPago() {
-        return tipoPago;
+    public TipoPagoEnum getTipo() {
+        return tipo;
     }
 
-    public void setTipoPago(String tipoPago) {
-        this.tipoPago = tipoPago;
+    public void setTipo(TipoPagoEnum tipo) {
+        this.tipo = tipo;
     }
-
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -69,15 +68,7 @@ public class ModoPago implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public List<DetalleVenta> getDetalleVentaList() {
-        return detalleVentaList;
-    }
-
-    public void setDetalleVentaList(List<DetalleVenta> detalleVentaList) {
-        this.detalleVentaList = detalleVentaList;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -87,7 +78,6 @@ public class ModoPago implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ModoPago)) {
             return false;
         }

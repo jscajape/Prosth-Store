@@ -1,29 +1,27 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "compra")
@@ -34,7 +32,10 @@ public class Compra implements Serializable {
     @Id
     @Column(name = "COD_COMPRA", nullable = false)
     private Integer codCompra;
-
+    
+    @Column(name = "COD_PROVEEDOR", nullable = false)
+    private Integer codProveedor;
+    
     @Column(name = "FECHA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
@@ -42,12 +43,11 @@ public class Compra implements Serializable {
     @Column(name = "VALOR_TOTAL", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorTotal;
     
-    @JoinColumn(name = "COD_PROVEEDOR", referencedColumnName = "COD_PROVEEDOR", nullable = false)
+    @JoinColumn(name = "COD_PROVEEDOR", referencedColumnName = "COD_PROVEEDOR", 
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private Proveedor codProveedor;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codCompra", fetch = FetchType.EAGER)
-    private List<DetalleCompra> detalleCompraList;
+    private Proveedor proveedor;
+
 
     public Compra() {
     }
@@ -80,21 +80,23 @@ public class Compra implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public Proveedor getCodProveedor() {
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public Integer getCodProveedor() {
         return codProveedor;
     }
 
-    public void setCodProveedor(Proveedor codProveedor) {
+    public void setCodProveedor(Integer codProveedor) {
         this.codProveedor = codProveedor;
     }
-
-    public List<DetalleCompra> getDetalleCompraList() {
-        return detalleCompraList;
-    }
-
-    public void setDetalleCompraList(List<DetalleCompra> detalleCompraList) {
-        this.detalleCompraList = detalleCompraList;
-    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -105,7 +107,6 @@ public class Compra implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Compra)) {
             return false;
         }

@@ -1,28 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "usuario")
@@ -32,6 +30,9 @@ public class Usuario implements Serializable {
     
     @EmbeddedId
     protected UsuarioPK usuarioPK;
+    
+    @Column(name = "COD_CIUDAD", nullable = false)
+    private Integer codCiudad;
     
     @Column(name = "CI", nullable = false, length = 10)
     private String ci;
@@ -61,16 +62,16 @@ public class Usuario implements Serializable {
     @Column(name = "CALLE_SECUNDARIA", nullable = false, length = 100)
     private String calleSecundaria;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.EAGER)
-    private List<Venta> ventaList;
     
-    @JoinColumn(name = "COD_TIPO_USUARIO", referencedColumnName = "COD_TIPO_USUARIO", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "COD_TIPO_USUARIO", referencedColumnName = "COD_TIPO_USUARIO", 
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
     private TipoUsuario tipoUsuario;
     
-    @JoinColumn(name = "COD_CIUDAD", referencedColumnName = "COD_CIUDAD", nullable = false)
+    @JoinColumn(name = "COD_CIUDAD", referencedColumnName = "COD_CIUDAD", 
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private Ciudad codCiudad;
+    private Ciudad ciudad;
 
     public Usuario() {
     }
@@ -163,14 +164,6 @@ public class Usuario implements Serializable {
         this.calleSecundaria = calleSecundaria;
     }
 
-    public List<Venta> getVentaList() {
-        return ventaList;
-    }
-
-    public void setVentaList(List<Venta> ventaList) {
-        this.ventaList = ventaList;
-    }
-
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
@@ -179,13 +172,22 @@ public class Usuario implements Serializable {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public Ciudad getCodCiudad() {
+    public Integer getCodCiudad() {
         return codCiudad;
     }
 
-    public void setCodCiudad(Ciudad codCiudad) {
+    public void setCodCiudad(Integer codCiudad) {
         this.codCiudad = codCiudad;
     }
+
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+
 
     @Override
     public int hashCode() {
@@ -196,7 +198,6 @@ public class Usuario implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Usuario)) {
             return false;
         }

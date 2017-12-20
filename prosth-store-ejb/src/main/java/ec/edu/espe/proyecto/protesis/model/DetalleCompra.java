@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Protesis Store
+ * Aplicaciones Distribuidas
+ * NRC: 2434 
+ * Tutor: HENRY RAMIRO CORAL CORAL 
+ * 2017 (c) Protesis Store Corp.
  */
 package ec.edu.espe.proyecto.protesis.model;
 
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author js_cm
+ * @author Protesis Store Corp.
  */
 @Entity
 @Table(name = "detalle_compra")
@@ -27,6 +29,12 @@ public class DetalleCompra implements Serializable {
     @Id
     @Column(name = "COD_DETALLE_COMPRA", nullable = false, length = 10)
     private String codDetalleCompra;
+    
+    @Column(name = "COD_COMPRA", nullable = false)
+    private Integer codCompra;
+    
+    @Column(name = "COD_PROVEEDOR", nullable = false)
+    private Integer codProveedor;
    
     @Column(name = "VALOR_TOTAL", nullable = false, precision = 8, scale = 2)
     private BigDecimal valorTotal;
@@ -35,18 +43,20 @@ public class DetalleCompra implements Serializable {
     private BigDecimal valorUnitario;
 
     @Column(name = "CANTIDAD", nullable = false)
-    private short cantidad;
+    private Integer cantidad;
 
     @Column(name = "DESCRIPCION", nullable = false, length = 100)
     private String descripcion;
     
-    @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO", nullable = false)
+    @JoinColumn(name = "COD_PRODUCTO", referencedColumnName = "COD_PRODUCTO",
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private Producto codProducto;
+    private Producto producto;
     
-    @JoinColumn(name = "COD_COMPRA", referencedColumnName = "COD_COMPRA", nullable = false)
+    @JoinColumn(name = "COD_COMPRA", referencedColumnName = "COD_COMPRA",
+            nullable = false, insertable = false, updatable = false)
     @ManyToOne
-    private Compra codCompra;
+    private Compra compra;
 
     public DetalleCompra() {
     }
@@ -80,13 +90,15 @@ public class DetalleCompra implements Serializable {
         this.valorUnitario = valorUnitario;
     }
 
-    public short getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(short cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
+
+
 
     public String getDescripcion() {
         return descripcion;
@@ -96,21 +108,38 @@ public class DetalleCompra implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Producto getCodProducto() {
-        return codProducto;
-    }
-
-    public void setCodProducto(Producto codProducto) {
-        this.codProducto = codProducto;
-    }
-
-    public Compra getCodCompra() {
+    public Integer getCodCompra() {
         return codCompra;
     }
 
-    public void setCodCompra(Compra codCompra) {
+    public void setCodCompra(Integer codCompra) {
         this.codCompra = codCompra;
     }
+
+    public Integer getCodProveedor() {
+        return codProveedor;
+    }
+
+    public void setCodProveedor(Integer codProveedor) {
+        this.codProveedor = codProveedor;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
 
     @Override
     public int hashCode() {
@@ -121,7 +150,6 @@ public class DetalleCompra implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof DetalleCompra)) {
             return false;
         }
