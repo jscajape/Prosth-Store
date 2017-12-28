@@ -32,7 +32,7 @@ public class Venta implements Serializable {
     
     @Id
     @Column(name = "COD_VENTA", nullable = false)
-    private Integer codVenta;
+    private Integer codigo;
     
     @Column(name = "COD_USUARIO", nullable = false)
     private Integer codUsuario;
@@ -58,16 +58,16 @@ public class Venta implements Serializable {
     public Venta() {
     }
 
-    public Venta(Integer codVenta) {
-        this.codVenta = codVenta;
+    public Venta(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Integer getCodVenta() {
-        return codVenta;
+        return codigo;
     }
 
-    public void setCodVenta(Integer codVenta) {
-        this.codVenta = codVenta;
+    public void setCodVenta(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Date getFecha() {
@@ -114,7 +114,7 @@ public class Venta implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codVenta != null ? codVenta.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -124,7 +124,7 @@ public class Venta implements Serializable {
             return false;
         }
         Venta other = (Venta) object;
-        if ((this.codVenta == null && other.codVenta != null) || (this.codVenta != null && !this.codVenta.equals(other.codVenta))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -132,7 +132,7 @@ public class Venta implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.Venta[ codVenta=" + codVenta + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.Venta[ codVenta=" + codigo + " ]";
     }
     
 }

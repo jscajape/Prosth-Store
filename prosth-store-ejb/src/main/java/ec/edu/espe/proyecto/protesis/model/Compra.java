@@ -31,7 +31,7 @@ public class Compra implements Serializable {
     
     @Id
     @Column(name = "COD_COMPRA", nullable = false)
-    private Integer codCompra;
+    private Integer codigo;
     
     @Column(name = "COD_PROVEEDOR", nullable = false)
     private Integer codProveedor;
@@ -52,16 +52,16 @@ public class Compra implements Serializable {
     public Compra() {
     }
 
-    public Compra(Integer codCompra) {
-        this.codCompra = codCompra;
+    public Compra(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Integer getCodCompra() {
-        return codCompra;
+        return codigo;
     }
 
-    public void setCodCompra(Integer codCompra) {
-        this.codCompra = codCompra;
+    public void setCodCompra(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Date getFecha() {
@@ -101,7 +101,7 @@ public class Compra implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codCompra != null ? codCompra.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -111,7 +111,7 @@ public class Compra implements Serializable {
             return false;
         }
         Compra other = (Compra) object;
-        if ((this.codCompra == null && other.codCompra != null) || (this.codCompra != null && !this.codCompra.equals(other.codCompra))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -119,7 +119,7 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.Compra[ codCompra=" + codCompra + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.Compra[ codCompra=" + codigo + " ]";
     }
     
 }

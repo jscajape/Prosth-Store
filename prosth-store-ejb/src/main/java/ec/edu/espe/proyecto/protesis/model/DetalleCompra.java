@@ -28,7 +28,7 @@ public class DetalleCompra implements Serializable {
     
     @Id
     @Column(name = "COD_DETALLE_COMPRA", nullable = false, length = 10)
-    private String codDetalleCompra;
+    private String codigo;
     
     @Column(name = "COD_COMPRA", nullable = false)
     private Integer codCompra;
@@ -62,16 +62,16 @@ public class DetalleCompra implements Serializable {
     }
 
     public DetalleCompra(String codDetalleCompra) {
-        this.codDetalleCompra = codDetalleCompra;
+        this.codigo = codDetalleCompra;
     }
 
 
     public String getCodDetalleCompra() {
-        return codDetalleCompra;
+        return codigo;
     }
 
     public void setCodDetalleCompra(String codDetalleCompra) {
-        this.codDetalleCompra = codDetalleCompra;
+        this.codigo = codDetalleCompra;
     }
 
     public BigDecimal getValorTotal() {
@@ -144,7 +144,7 @@ public class DetalleCompra implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codDetalleCompra != null ? codDetalleCompra.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -154,7 +154,7 @@ public class DetalleCompra implements Serializable {
             return false;
         }
         DetalleCompra other = (DetalleCompra) object;
-        if ((this.codDetalleCompra == null && other.codDetalleCompra != null) || (this.codDetalleCompra != null && !this.codDetalleCompra.equals(other.codDetalleCompra))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -162,7 +162,7 @@ public class DetalleCompra implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.DetalleCompra[ codDetalleCompra=" + codDetalleCompra + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.DetalleCompra[ codDetalleCompra=" + codigo + " ]";
     }
     
 }

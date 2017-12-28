@@ -29,7 +29,7 @@ public class Conductor implements Serializable {
     
     @Id
     @Column(name = "COD_CONDUCTOR", nullable = false)
-    private Integer codConductor;
+    private Integer codigo;
 
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
@@ -51,16 +51,16 @@ public class Conductor implements Serializable {
     }
 
     public Conductor(Integer codConductor) {
-        this.codConductor = codConductor;
+        this.codigo = codConductor;
     }
 
 
     public Integer getCodConductor() {
-        return codConductor;
+        return codigo;
     }
 
     public void setCodConductor(Integer codConductor) {
-        this.codConductor = codConductor;
+        this.codigo = codConductor;
     }
 
     public String getNombre() {
@@ -106,7 +106,7 @@ public class Conductor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codConductor != null ? codConductor.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -116,7 +116,7 @@ public class Conductor implements Serializable {
             return false;
         }
         Conductor other = (Conductor) object;
-        if ((this.codConductor == null && other.codConductor != null) || (this.codConductor != null && !this.codConductor.equals(other.codConductor))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -124,7 +124,7 @@ public class Conductor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.Conductor[ codConductor=" + codConductor + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.Conductor[ codConductor=" + codigo + " ]";
     }
     
 }

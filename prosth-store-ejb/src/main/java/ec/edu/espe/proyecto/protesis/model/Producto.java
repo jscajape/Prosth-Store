@@ -28,7 +28,7 @@ public class Producto implements Serializable {
     
     @Id
     @Column(name = "COD_PRODUCTO", nullable = false)
-    private Integer codProducto;
+    private Integer codigo;
     
     @Column(name = "COD_CATEGORIA", nullable = false)
     private Integer codCategoria;
@@ -56,17 +56,17 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(Integer codProducto) {
-        this.codProducto = codProducto;
+    public Producto(Integer codigo) {
+        this.codigo = codigo;
     }
 
 
     public Integer getCodProducto() {
-        return codProducto;
+        return codigo;
     }
 
-    public void setCodProducto(Integer codProducto) {
-        this.codProducto = codProducto;
+    public void setCodProducto(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public String getDescripcion() {
@@ -129,7 +129,7 @@ public class Producto implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codProducto != null ? codProducto.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -139,7 +139,7 @@ public class Producto implements Serializable {
             return false;
         }
         Producto other = (Producto) object;
-        if ((this.codProducto == null && other.codProducto != null) || (this.codProducto != null && !this.codProducto.equals(other.codProducto))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -147,7 +147,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.Producto[ codProducto=" + codProducto + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.Producto[ codProducto=" + codigo + " ]";
     }
     
 }

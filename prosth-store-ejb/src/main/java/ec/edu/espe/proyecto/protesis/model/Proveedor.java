@@ -25,7 +25,7 @@ public class Proveedor implements Serializable {
     
     @Id
     @Column(name = "COD_PROVEEDOR", nullable = false)
-    private Integer codProveedor;
+    private Integer codigo;
 
     @Column(name = "NOMBRE", nullable = false, length = 100)
     private String nombre;
@@ -36,16 +36,16 @@ public class Proveedor implements Serializable {
     public Proveedor() {
     }
 
-    public Proveedor(Integer codProveedor) {
-        this.codProveedor = codProveedor;
+    public Proveedor(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public Integer getCodProveedor() {
-        return codProveedor;
+        return codigo;
     }
 
     public void setCodProveedor(Integer codProveedor) {
-        this.codProveedor = codProveedor;
+        this.codigo = codProveedor;
     }
 
     public String getNombre() {
@@ -67,7 +67,7 @@ public class Proveedor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codProveedor != null ? codProveedor.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -77,7 +77,7 @@ public class Proveedor implements Serializable {
             return false;
         }
         Proveedor other = (Proveedor) object;
-        if ((this.codProveedor == null && other.codProveedor != null) || (this.codProveedor != null && !this.codProveedor.equals(other.codProveedor))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -85,7 +85,7 @@ public class Proveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.Proveedor[ codProveedor=" + codProveedor + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.Proveedor[ codProveedor=" + codigo + " ]";
     }
     
 }

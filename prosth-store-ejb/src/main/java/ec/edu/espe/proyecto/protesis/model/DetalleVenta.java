@@ -28,7 +28,7 @@ public class DetalleVenta implements Serializable {
     
     @Id
     @Column(name = "COD_DETALLE", nullable = false, length = 10)
-    private String codDetalle;
+    private String codigo;
     
     @Column(name = "COD_VENTA", nullable = false)
     private Integer codVenta;
@@ -70,16 +70,16 @@ public class DetalleVenta implements Serializable {
     }
 
     public DetalleVenta(String codDetalle) {
-        this.codDetalle = codDetalle;
+        this.codigo = codDetalle;
     }
 
 
     public String getCodDetalle() {
-        return codDetalle;
+        return codigo;
     }
 
     public void setCodDetalle(String codDetalle) {
-        this.codDetalle = codDetalle;
+        this.codigo = codDetalle;
     }
 
     public String getDescripcion() {
@@ -167,7 +167,7 @@ public class DetalleVenta implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codDetalle != null ? codDetalle.hashCode() : 0);
+        hash += (codigo != null ? codigo.hashCode() : 0);
         return hash;
     }
 
@@ -177,7 +177,7 @@ public class DetalleVenta implements Serializable {
             return false;
         }
         DetalleVenta other = (DetalleVenta) object;
-        if ((this.codDetalle == null && other.codDetalle != null) || (this.codDetalle != null && !this.codDetalle.equals(other.codDetalle))) {
+        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
             return false;
         }
         return true;
@@ -185,7 +185,7 @@ public class DetalleVenta implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.edu.espe.proyecto.protesis.model.DetalleVenta[ codDetalle=" + codDetalle + " ]";
+        return "ec.edu.espe.proyecto.protesis.model.DetalleVenta[ codDetalle=" + codigo + " ]";
     }
     
 }
