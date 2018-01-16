@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>prosth-store</artifactId>
-        <groupId>ec.edu.espe.proyecto.protesis</groupId>
-        <version>1</version>
-    </parent>
+    <artifactId>prosth-store</artifactId>
+    <groupId>ec.edu.espe.distribuidas.prosth</groupId>
+    <version>1</version>
+  </parent>
 
-    <groupId>ec.edu.espe.proyecto.protesis</groupId>
+    <groupId>ec.edu.espe.distribuidas.prosth</groupId>
     <artifactId>prosth-store-web</artifactId>
     <version>1</version>
     <packaging>war</packaging>
@@ -20,16 +20,26 @@
     </properties>
     
     <dependencies>
-<!--        <dependency>
+         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>6.1</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
-            <artifactId>afternoon</artifactId>
+            <artifactId>bootstrap</artifactId>
             <version>1.0.10</version>
-        </dependency>-->
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.3</version>
+        </dependency>     
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -37,7 +47,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>ec.edu.espe.proyecto.protesis</groupId>
+            <groupId>ec.edu.espe.distribuidas.prosth</groupId>
             <artifactId>prosth-store-ejb</artifactId>
             <version>1</version>
             <scope>provided</scope>
@@ -93,12 +103,12 @@
             </plugin>
         </plugins>
     </build>
-<!--    <repositories>
+    <repositories>
         <repository>
             <url>http://repository.primefaces.org/</url>
             <id>PrimeFaces-maven-lib</id>
             <layout>default</layout>
             <name>Repository for library PrimeFaces-maven-lib</name>
         </repository>
-    </repositories>-->
+    </repositories>
 </project>

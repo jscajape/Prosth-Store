@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
     <artifactId>prosth-store</artifactId>
-    <groupId>ec.edu.espe.proyecto.protesis</groupId>
+    <groupId>ec.edu.espe.distribuidas.prosth</groupId>
     <version>1</version>
   </parent>
 
-    <groupId>ec.edu.espe.proyecto.protesis</groupId>
+    <groupId>ec.edu.espe.distribuidas.prosth</groupId>
     <artifactId>prosth-store-ear</artifactId>
     <version>1</version>
     <packaging>ear</packaging>
@@ -42,13 +42,13 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>ec.edu.espe.proyecto.protesis</groupId>
+            <groupId>ec.edu.espe.distribuidas.prosth</groupId>
             <artifactId>prosth-store-ejb</artifactId>
             <version>1</version>
             <type>ejb</type>
         </dependency>
         <dependency>
-            <groupId>ec.edu.espe.proyecto.protesis</groupId>
+            <groupId>ec.edu.espe.distribuidas.prosth</groupId>
             <artifactId>prosth-store-web</artifactId>
             <version>1</version>
             <type>war</type>
